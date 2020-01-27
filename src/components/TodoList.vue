@@ -11,6 +11,15 @@
         v-on:toggle-done="handleToggleDone"
       />
     </ul>
+    <input
+      v-model="newValue"
+    />
+    <button
+      v-on:click="handleAddClick"
+      v-bind:disabled="!canSubmit"
+      >
+      add
+    </button>
   </div>
 </template>
 
@@ -30,7 +39,13 @@ export default {
         { id: 2, text: 'baz', done: false },
         { id: 3, text: 'quux', done: false },
       ],
+      newValue: '',
     }
+  },
+  computed: {
+    canSubmit: function() {
+      return !!this.newValue.trim()
+    },
   },
   methods: {
     handleToggleDone: function (id) {
@@ -42,6 +57,17 @@ export default {
           }
           : item
       })
+    },
+    handleAddClick: function () {
+      this.items = [
+        ...this.items,
+        {
+          id: this.items.length,
+          done: false,
+          text: 'new item',
+        },
+      ]
+      this.newValue = ''
     },
   },
 }

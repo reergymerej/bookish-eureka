@@ -1,13 +1,7 @@
 <template>
   <li v-on:click="handleClick">
     <span
-      v-if="done"
-      class="done">
-      {{ text }}
-    </span>
-    <span
-      v-if="!done"
-      >
+      v-bind:class="{ done: done }">
       {{ text }}
     </span>
   </li>
